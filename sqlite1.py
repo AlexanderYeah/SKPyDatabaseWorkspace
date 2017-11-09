@@ -21,7 +21,7 @@ print("open db successfully");
 # 创建游标
 cursor = conn.cursor();
 # sql 语句
-sql = """CREATE TABLE CLASS
+sql = """CREATE TABLE IF NOT EXISTS CLASS
     (ID INT PRIMARY KEY NOT NULL,
     NAME  TEXT NOT NULL ,
     AGE INT NOT  NULL
@@ -31,6 +31,56 @@ cursor.execute(sql);
 print("create Table successfully");
 conn.commit();
 conn.close();
+
+
+# 插入数据
+# conn1 = sqlite3.connect("test1.db");
+# cursor1 = conn1.cursor();
+# students = [(4,"Alexander",26),(5,"Tom",15),(6,"Green",87)];
+# #  executemany 执行多次插入操作
+# # execute 执行一次插入操作
+# cursor1.executemany("INSERT INTO CLASS VALUES(?,?,?)",students);
+# conn1.commit();
+# conn1.close();
+
+
+# 查询操作
+
+conn2 = sqlite3.connect("test1.db");
+cursor2 = conn2.cursor();
+
+# # 查询一条记录 默认取第一条
+# cursor2.execute("SELECT NAME FROM CLASS");
+# # 取得一条数据
+# res2 = cursor2.fetchone();
+# print(res2);
+#
+# # 查询所有数据返回一个list
+# cursor2.execute("SELECT * FROM CLASS WHERE  ID = 1");
+# # 获取多条数据
+# res2_many = cursor2.fetchall();
+# print(res2_many);
+
+
+
+#更新操作
+cursor2.execute("UPDATE CLASS SET NAME = ? WHERE ID = ?",("YEAH",1));
+
+# 删除操作
+cursor2.execute("DELETE FROM CLASS WHERE ID = 4");
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
